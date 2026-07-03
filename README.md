@@ -1,0 +1,2 @@
+# goodornot
+good-or-not
