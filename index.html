@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f1e6" />
+    <meta name="description" content="作品好不好：人民群众喜闻乐见的就是好作品" />
+    <meta property="og:title" content="作品好不好" />
+    <meta property="og:description" content="人民群众喜闻乐见的就是好作品" />
+    <meta property="og:image" content="assets/work-1.png" />
+    <title>作品好不好</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="brand" type="button" data-view="feed" aria-label="返回作品流">
+          <span class="brand-mark">好</span>
+          <span>
+            <strong>作品好不好</strong>
+            <small>人民群众喜闻乐见的就是好作品</small>
+          </span>
+        </button>
+        <button class="icon-btn" id="shareBtn" type="button" aria-label="分享">
+          <span aria-hidden="true">↗</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="view is-active" id="feedView" aria-label="作品流">
+          <div class="feed-head">
+            <div>
+              <p class="eyebrow">今日作品</p>
+              <h1>一眼定乾坤</h1>
+            </div>
+            <div class="weight-pill">
+              <span>权重</span>
+              <strong id="userWeight">1.000</strong>
+            </div>
+          </div>
+
+          <div class="toolbar" role="group" aria-label="作品筛选">
+            <button class="seg is-selected" type="button" data-filter="all">全部</button>
+            <button class="seg" type="button" data-filter="fresh">新发布</button>
+            <button class="seg" type="button" data-filter="popular">热评作品</button>
+            <button class="seg" type="button" data-filter="elite">精品</button>
+          </div>
+
+          <div class="search-row">
+            <input id="searchInput" type="search" placeholder="搜索作品、分类、年份" />
+            <select id="sortSelect" aria-label="排序">
+              <option value="latest">最新上传</option>
+              <option value="good">最多好评</option>
+              <option value="smart">智能权重</option>
+            </select>
+          </div>
+
+          <div class="work-list" id="workList"></div>
+        </section>
+
+        <section class="view" id="uploadView" aria-label="发布作品">
+          <div class="panel-head">
+            <p class="eyebrow">发布</p>
+            <h1>上传作品</h1>
+          </div>
+          <form class="upload-form" id="uploadForm">
+            <label>
+              <span>作品名称</span>
+              <input name="title" maxlength="24" required placeholder="如：临颜勤礼碑" />
+            </label>
+            <div class="form-grid">
+              <label>
+                <span>创作年份</span>
+                <input name="year" inputmode="numeric" maxlength="4" required placeholder="2026" />
+              </label>
+              <label>
+                <span>分类</span>
+                <select name="category" required>
+                  <option>篆</option>
+                  <option>隶</option>
+                  <option selected>楷</option>
+                  <option>行</option>
+                  <option>草</option>
+                  <option>篆刻</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              <span>简介</span>
+              <textarea name="intro" maxlength="50" rows="3" placeholder="50字以内"></textarea>
+            </label>
+            <label class="file-box">
+              <input name="image" type="file" accept="image/*" multiple />
+              <span class="file-icon">＋</span>
+              <span>选择作品图片，最多4张</span>
+            </label>
+            <div class="preview-grid" id="uploadPreview" hidden></div>
+            <button class="primary-btn" type="submit">发布作品</button>
+          </form>
+        </section>
+
+        <section class="view" id="profileView" aria-label="个人主页">
+          <div class="profile-hero">
+            <div class="avatar" id="profileAvatar">墨</div>
+            <div>
+              <p class="eyebrow">个人主页</p>
+              <h1 id="profileName">未名书友</h1>
+              <p class="muted" id="profileLevel">普通观众 · 普通用户</p>
+              <p class="profile-bio" id="profileBio">一眼看作品，好孬见真章</p>
+            </div>
+            <button class="ghost-btn profile-edit-btn" id="editProfileBtn" type="button">编辑资料</button>
+          </div>
+
+          <div class="stats-grid">
+            <div><span>评价权重</span><strong id="profileWeight">1.000</strong></div>
+            <div><span>已评价</span><strong id="profileVotes">0</strong></div>
+            <div><span>发布作品</span><strong id="profileWorks">0</strong></div>
+            <div><span>获得奖励</span><strong id="profileReward">0.000</strong></div>
+          </div>
+
+          <div class="section-title">
+            <h2>评价历史</h2>
+          </div>
+          <div class="history-list" id="historyList"></div>
+
+          <div class="section-title">
+            <h2>书友留言</h2>
+          </div>
+          <div class="message-list" id="messageList"></div>
+
+          <div class="section-title">
+            <h2>我的作品</h2>
+          </div>
+          <div class="mini-list" id="myWorks"></div>
+        </section>
+
+        <section class="view" id="rulesView" aria-label="规则">
+          <div class="panel-head">
+            <p class="eyebrow">规则</p>
+            <h1>多数共识</h1>
+          </div>
+          <div class="rule-block">
+            <h2>作品阶段</h2>
+            <div class="stage-table">
+              <div><strong>新发布</strong><span>1-9评</span><em>+0.005</em></div>
+              <div><strong>少评作品</strong><span>10-99评</span><em>+0.005</em></div>
+              <div><strong>多评作品</strong><span>100-999评</span><em>+0.005</em></div>
+              <div><strong>热评作品</strong><span>1000评以上</span><em>+0.010</em></div>
+            </div>
+          </div>
+          <div class="rule-block">
+            <h2>好评程度</h2>
+            <ul class="plain-list">
+              <li><strong>好评作品</strong><span>超过9评，好评率超过50%</span></li>
+              <li><strong>优秀作品</strong><span>超过99评，好评率超过70%</span></li>
+              <li><strong>精品作品</strong><span>超过999评，好评率超过90%</span></li>
+            </ul>
+          </div>
+          <div class="rule-block">
+            <h2>底线</h2>
+            <ul class="plain-list">
+              <li><strong>一次评价</strong><span>同一用户对同一作品只能评价一次</span></li>
+              <li><strong>先评后看</strong><span>未评价前隐藏作者与评价数据</span></li>
+              <li><strong>收益封顶</strong><span>单作品累计权重收益最高0.025</span></li>
+            </ul>
+          </div>
+        </section>
+      </main>
+
+      <nav class="tabbar" aria-label="底部导航">
+        <button class="tab is-active" type="button" data-view="feed">
+          <span>⌂</span>
+          <strong>作品</strong>
+        </button>
+        <button class="tab" type="button" data-view="upload">
+          <span>＋</span>
+          <strong>发布</strong>
+        </button>
+        <button class="tab" type="button" data-view="profile">
+          <span>◉</span>
+          <strong>我的</strong>
+        </button>
+        <button class="tab" type="button" data-view="rules">
+          <span>?</span>
+          <strong>规则</strong>
+        </button>
+      </nav>
+
+      <div class="modal" id="authorModal" hidden>
+        <button class="modal-backdrop" type="button" aria-label="关闭"></button>
+        <section class="author-sheet" role="dialog" aria-modal="true" aria-labelledby="authorModalTitle">
+          <button class="sheet-close" type="button" aria-label="关闭">×</button>
+          <div class="author-head">
+            <div class="avatar author-avatar">墨</div>
+            <div>
+              <p class="eyebrow">发布者</p>
+              <h2 id="authorModalTitle"></h2>
+              <p class="muted" id="authorModalLevel"></p>
+              <p class="profile-bio" id="authorModalBio"></p>
+            </div>
+          </div>
+          <div class="author-stats" id="authorStats"></div>
+          <div class="author-work" id="authorWork"></div>
+          <button class="primary-btn message-author-btn" id="messageAuthorBtn" type="button">给书友留言</button>
+        </section>
+      </div>
+
+      <div class="modal" id="messageModal" hidden>
+        <button class="modal-backdrop" type="button" aria-label="关闭"></button>
+        <section class="author-sheet" role="dialog" aria-modal="true" aria-labelledby="messageModalTitle">
+          <button class="sheet-close" type="button" aria-label="关闭">×</button>
+          <div class="panel-head settings-head">
+            <p class="eyebrow">私密留言</p>
+            <h2 id="messageModalTitle">给书友留言</h2>
+            <p class="muted" id="messageTarget"></p>
+          </div>
+          <form class="settings-form" id="messageForm">
+            <label>
+              <span>留言内容</span>
+              <textarea name="content" maxlength="100" rows="4" required placeholder="100字以内，仅对方可见"></textarea>
+            </label>
+            <div class="form-foot">
+              <span id="messageCount">0/100</span>
+              <button class="primary-btn" type="submit">提交留言</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <div class="modal" id="profileModal" hidden>
+        <button class="modal-backdrop" type="button" aria-label="关闭"></button>
+        <section class="author-sheet" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle">
+          <button class="sheet-close" type="button" aria-label="关闭">×</button>
+          <div class="panel-head settings-head">
+            <p class="eyebrow">账户设置</p>
+            <h2 id="profileModalTitle">修改个人信息</h2>
+          </div>
+          <form class="settings-form" id="profileForm">
+            <label>
+              <span>展示昵称</span>
+              <input name="nickname" maxlength="16" required />
+            </label>
+            <label>
+              <span>头像显示字</span>
+              <input name="avatarText" maxlength="2" required />
+            </label>
+            <label>
+              <span>自我介绍</span>
+              <input name="bio" maxlength="20" placeholder="20字以内" />
+            </label>
+            <label>
+              <span>注册邮箱</span>
+              <input name="email" type="email" placeholder="name@example.com" />
+            </label>
+            <label>
+              <span>登录密码</span>
+              <input name="password" type="password" placeholder="留空则不修改" />
+            </label>
+            <button class="primary-btn" type="submit">保存资料</button>
+          </form>
+        </section>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+
+    <template id="workCardTemplate">
+      <article class="work-card">
+        <div class="work-media-wrap">
+          <img class="work-media" alt="" loading="lazy" />
+          <div class="badge-stack">
+            <div class="heat-badge"></div>
+          </div>
+          <div class="degree-badge" hidden></div>
+        </div>
+        <div class="thumb-strip" hidden></div>
+        <div class="work-body">
+          <div class="work-title-row">
+            <div>
+              <h2></h2>
+              <p class="meta"></p>
+            </div>
+            <button class="ghost-btn detail-btn" type="button">详情</button>
+          </div>
+          <p class="intro"></p>
+          <div class="result-panel" hidden></div>
+          <div class="vote-row">
+            <button class="vote-btn good" type="button" data-vote="good">好</button>
+            <button class="vote-btn bad" type="button" data-vote="bad">孬</button>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
