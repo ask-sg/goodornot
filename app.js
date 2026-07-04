@@ -64,12 +64,15 @@ const defaultState = {
     feedOpenCount: 0,
     nickname: "未名书友",
     avatarText: "墨",
+    avatarImage: "",
     bio: "一眼看作品，好孬见真章",
     email: "",
     passwordSet: false,
+    isAuthenticated: false,
   },
   works: seedWorks,
   messages: [],
+  accounts: [],
 };
 
 let state = loadState();
@@ -92,6 +95,7 @@ const toast = document.querySelector("#toast");
 const authorModal = document.querySelector("#authorModal");
 const profileModal = document.querySelector("#profileModal");
 const messageModal = document.querySelector("#messageModal");
+const authModal = document.querySelector("#authModal");
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -106,6 +110,7 @@ function loadState() {
       user: { ...defaultState.user, ...parsed.user },
       works: [...works, ...uploaded],
       messages: Array.isArray(parsed.messages) ? parsed.messages : [],
+      accounts: Array.isArray(parsed.accounts) ? parsed.accounts : [],
     };
     normalizeWorks(loadedState.works);
     return loadedState;
@@ -126,6 +131,7 @@ function normalizeWorks(works) {
     work.images = images.slice(0, 4);
     work.image = work.images[0] || "assets/work-1.png";
     if (!work.authorBio) work.authorBio = "暂未填写自我介绍";
+    if (!("authorAvatar" in work)) work.authorAvatar = "";
   });
 }
 
@@ -192,10 +198,116 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function setAvatar(element, text, image) {
+  element.textContent = "";
+  element.style.backgroundImage = "";
+  element.classList.toggle("has-image", Boolean(image));
+  if (image) {
+    element.style.backgroundImage = `url("${image}")`;
+  } else {
+    element.textContent = text || "墨";
+  }
+}
+
 function render() {
   renderFeed();
   renderProfile();
   document.querySelector("#userWeight").textContent = formatWeight(state.user.weight);
+  document.querySelector("#logoutBtn").hidden = !state.user.isAuthenticated;
+}
+
+function requireAuth(message = "请先注册或登录") {
+  if (state.user.isAuthenticated) return true;
+  showToast(message);
+  openAuthModal("register");
+  return false;
+}
+
+function openAuthModal(tab = "register") {
+  switchAuthTab(tab);
+  authModal.hidden = false;
+}
+
+function closeAuthModal() {
+  if (state.user.isAuthenticated) authModal.hidden = true;
+}
+
+function switchAuthTab(tab) {
+  document.querySelectorAll("[data-auth-tab]").forEach((button) => {
+    button.classList.toggle("is-selected", button.dataset.authTab === tab);
+  });
+  document.querySelector("#registerForm").classList.toggle("is-active", tab === "register");
+  document.querySelector("#loginForm").classList.toggle("is-active", tab === "login");
+}
+
+function registerAccount(form) {
+  const email = form.email.value.trim().toLowerCase();
+  const password = form.password.value;
+  const nickname = form.nickname.value.trim() || "未名书友";
+
+  if (state.accounts.some((account) => account.email === email)) {
+    showToast("这个邮箱已经注册过");
+    switchAuthTab("login");
+    return;
+  }
+
+  const account = {
+    email,
+    password,
+    nickname,
+    avatarText: nickname.slice(0, 1),
+    avatarImage: "",
+    bio: "一眼看作品，好孬见真章",
+  };
+  state.accounts.push(account);
+  applyAccount(account);
+  showToast("注册成功");
+}
+
+function loginAccount(form) {
+  const email = form.email.value.trim().toLowerCase();
+  const password = form.password.value;
+  const account = state.accounts.find((item) => item.email === email && item.password === password);
+
+  if (!account) {
+    showToast("邮箱或密码不正确");
+    return;
+  }
+
+  applyAccount(account);
+  showToast("登录成功");
+}
+
+function applyAccount(account) {
+  state.user.isAuthenticated = true;
+  state.user.email = account.email;
+  state.user.nickname = account.nickname;
+  state.user.avatarText = account.avatarText;
+  state.user.avatarImage = account.avatarImage || "";
+  state.user.bio = account.bio;
+  state.user.passwordSet = true;
+  saveState();
+  render();
+  closeAuthModal();
+}
+
+function persistCurrentAccount(oldEmail, password) {
+  const account = state.accounts.find((item) => item.email === oldEmail || item.email === state.user.email);
+  if (!account) return;
+  account.email = state.user.email;
+  account.nickname = state.user.nickname;
+  account.avatarText = state.user.avatarText;
+  account.avatarImage = state.user.avatarImage || "";
+  account.bio = state.user.bio;
+  if (password) account.password = password;
+}
+
+function logout() {
+  state.user.isAuthenticated = false;
+  saveState();
+  render();
+  openAuthModal("login");
+  showToast("已退出登录");
 }
 
 function renderFeed() {
@@ -281,6 +393,7 @@ function renderFeed() {
 }
 
 function vote(workId, voteValue) {
+  if (!requireAuth("登录后才能评价作品")) return;
   if (state.user.votes[workId]) return;
   const work = state.works.find((item) => item.id === workId);
   if (!work) return;
@@ -337,7 +450,7 @@ function openAuthorModal(work) {
   authorModal.querySelector("#authorModalTitle").textContent = work.author;
   authorModal.querySelector("#authorModalLevel").textContent = work.authorLevel;
   authorModal.querySelector("#authorModalBio").textContent = work.authorBio || "暂未填写自我介绍";
-  authorModal.querySelector(".author-avatar").textContent = work.author.slice(0, 1);
+  setAvatar(authorModal.querySelector(".author-avatar"), work.author.slice(0, 1), work.authorAvatar);
   authorModal.querySelector("#authorStats").innerHTML = `
     <div><span>发布作品</span><strong>${authorWorks.length}</strong></div>
     <div><span>累计评价</span><strong>${authorTotal}</strong></div>
@@ -359,6 +472,7 @@ function closeAuthorModal() {
 }
 
 function openMessageModal() {
+  if (!requireAuth("登录后才能给书友留言")) return;
   if (!activeDetailWork) return;
   const form = document.querySelector("#messageForm");
   form.elements.content.value = "";
@@ -402,9 +516,12 @@ function updateMessageCount() {
 }
 
 function openProfileModal() {
+  if (!requireAuth("登录后才能修改资料")) return;
   const form = document.querySelector("#profileForm");
+  window.pendingAvatarImage = undefined;
   form.nickname.value = state.user.nickname;
   form.avatarText.value = state.user.avatarText;
+  setAvatar(document.querySelector("#avatarPreview"), state.user.avatarText, state.user.avatarImage);
   form.bio.value = state.user.bio || "";
   form.email.value = state.user.email || "";
   form.password.value = "";
@@ -416,11 +533,13 @@ function closeProfileModal() {
 }
 
 function saveProfile(form) {
+  const oldEmail = state.user.email;
   const nickname = form.nickname.value.trim() || "未名书友";
   const avatarText = form.avatarText.value.trim().slice(0, 2) || nickname.slice(0, 1);
 
   state.user.nickname = nickname;
   state.user.avatarText = avatarText;
+  if (window.pendingAvatarImage !== undefined) state.user.avatarImage = window.pendingAvatarImage;
   state.user.bio = form.bio.value.trim().slice(0, 20);
   state.user.email = form.email.value.trim();
   if (form.password.value) state.user.passwordSet = true;
@@ -429,8 +548,10 @@ function saveProfile(form) {
     if (state.user.uploaded.includes(work.id)) {
       work.author = nickname;
       work.authorBio = state.user.bio || "暂未填写自我介绍";
+      work.authorAvatar = state.user.avatarImage || "";
     }
   });
+  persistCurrentAccount(oldEmail, form.password.value);
 
   saveState();
   render();
@@ -443,7 +564,7 @@ function renderProfile() {
   const history = state.user.history;
 
   document.querySelector("#profileName").textContent = state.user.nickname;
-  document.querySelector("#profileAvatar").textContent = state.user.avatarText;
+  setAvatar(document.querySelector("#profileAvatar"), state.user.avatarText, state.user.avatarImage);
   document.querySelector("#profileBio").textContent = state.user.bio || "暂未填写自我介绍";
   document.querySelector("#profileWeight").textContent = formatWeight(state.user.weight);
   document.querySelector("#profileVotes").textContent = history.length;
@@ -530,6 +651,7 @@ function getReviewerLevel() {
 }
 
 function switchView(name) {
+  if ((name === "upload" || name === "profile") && !requireAuth("请先注册或登录")) return;
   Object.entries(views).forEach(([viewName, view]) => {
     view.classList.toggle("is-active", viewName === name);
   });
@@ -577,6 +699,22 @@ document.querySelector("#shareBtn").addEventListener("click", async () => {
   }
 });
 
+document.querySelectorAll("[data-auth-tab]").forEach((button) => {
+  button.addEventListener("click", () => switchAuthTab(button.dataset.authTab));
+});
+
+document.querySelector("#registerForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  registerAccount(event.currentTarget);
+});
+
+document.querySelector("#loginForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  loginAccount(event.currentTarget);
+});
+
+document.querySelector("#logoutBtn").addEventListener("click", logout);
+
 authorModal.querySelector(".modal-backdrop").addEventListener("click", closeAuthorModal);
 authorModal.querySelector(".sheet-close").addEventListener("click", closeAuthorModal);
 document.querySelector("#messageAuthorBtn").addEventListener("click", openMessageModal);
@@ -593,6 +731,12 @@ profileModal.querySelector(".sheet-close").addEventListener("click", closeProfil
 document.querySelector("#profileForm").addEventListener("submit", (event) => {
   event.preventDefault();
   saveProfile(event.currentTarget);
+});
+document.querySelector("input[name='avatarImage']").addEventListener("change", async (event) => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  window.pendingAvatarImage = await readImageFile(file);
+  setAvatar(document.querySelector("#avatarPreview"), state.user.avatarText, window.pendingAvatarImage);
 });
 
 document.querySelector("input[name='image']").addEventListener("change", async (event) => {
@@ -614,6 +758,7 @@ document.querySelector("input[name='image']").addEventListener("change", async (
 
 document.querySelector("#uploadForm").addEventListener("submit", (event) => {
   event.preventDefault();
+  if (!requireAuth("登录后才能发布作品")) return;
   const data = new FormData(event.currentTarget);
   const today = new Date();
   const datePart = today.toISOString().slice(0, 10).replace(/-/g, "");
@@ -631,6 +776,7 @@ document.querySelector("#uploadForm").addEventListener("submit", (event) => {
     author: state.user.nickname,
     authorLevel: "爱好者",
     authorBio: state.user.bio || "暂未填写自我介绍",
+    authorAvatar: state.user.avatarImage || "",
     createdAt: today.toISOString().slice(0, 10),
     goodWeight: 0,
     badWeight: 0,
@@ -651,6 +797,9 @@ document.querySelector("#uploadForm").addEventListener("submit", (event) => {
 });
 
 render();
+if (!state.user.isAuthenticated) {
+  openAuthModal(state.accounts.length ? "login" : "register");
+}
 
 function getWorkImages(work) {
   return Array.isArray(work.images) && work.images.length ? work.images : [work.image || "assets/work-1.png"];

@@ -110,6 +110,7 @@
               <p class="profile-bio" id="profileBio">一眼看作品，好孬见真章</p>
             </div>
             <button class="ghost-btn profile-edit-btn" id="editProfileBtn" type="button">编辑资料</button>
+            <button class="ghost-btn" id="logoutBtn" type="button">退出</button>
           </div>
 
           <div class="stats-grid">
@@ -245,6 +246,14 @@
               <span>头像显示字</span>
               <input name="avatarText" maxlength="2" required />
             </label>
+            <label class="avatar-upload">
+              <span>头像图片</span>
+              <input name="avatarImage" type="file" accept="image/*" />
+              <div class="avatar-upload-row">
+                <div class="avatar" id="avatarPreview">墨</div>
+                <strong>选择图片</strong>
+              </div>
+            </label>
             <label>
               <span>自我介绍</span>
               <input name="bio" maxlength="20" placeholder="20字以内" />
@@ -258,6 +267,46 @@
               <input name="password" type="password" placeholder="留空则不修改" />
             </label>
             <button class="primary-btn" type="submit">保存资料</button>
+          </form>
+        </section>
+      </div>
+
+      <div class="modal auth-modal" id="authModal" hidden>
+        <div class="modal-backdrop"></div>
+        <section class="author-sheet auth-sheet" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+          <div class="panel-head settings-head">
+            <p class="eyebrow">账号</p>
+            <h2 id="authTitle">注册 / 登录</h2>
+          </div>
+          <div class="auth-tabs" role="group" aria-label="账号操作">
+            <button class="seg is-selected" type="button" data-auth-tab="register">注册</button>
+            <button class="seg" type="button" data-auth-tab="login">登录</button>
+          </div>
+          <form class="settings-form auth-form is-active" id="registerForm">
+            <label>
+              <span>昵称</span>
+              <input name="nickname" maxlength="16" required placeholder="未名书友" />
+            </label>
+            <label>
+              <span>注册邮箱</span>
+              <input name="email" type="email" required placeholder="name@example.com" />
+            </label>
+            <label>
+              <span>登录密码</span>
+              <input name="password" type="password" minlength="6" required placeholder="至少6位" />
+            </label>
+            <button class="primary-btn" type="submit">注册并进入</button>
+          </form>
+          <form class="settings-form auth-form" id="loginForm">
+            <label>
+              <span>注册邮箱</span>
+              <input name="email" type="email" required placeholder="name@example.com" />
+            </label>
+            <label>
+              <span>登录密码</span>
+              <input name="password" type="password" required />
+            </label>
+            <button class="primary-btn" type="submit">登录</button>
           </form>
         </section>
       </div>

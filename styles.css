@@ -152,6 +152,10 @@ main {
   margin-left: auto;
 }
 
+#logoutBtn[hidden] {
+  display: none;
+}
+
 .profile-bio {
   margin: 5px 0 0;
   color: #5c5148;
@@ -560,9 +564,35 @@ textarea:focus {
   height: 58px;
   border-radius: 50%;
   background: var(--red);
+  background-position: center;
+  background-size: cover;
   color: white;
   font-size: 24px;
   font-weight: 900;
+  overflow: hidden;
+}
+
+.avatar.has-image {
+  color: transparent;
+  text-indent: -999px;
+}
+
+.avatar-upload input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.avatar-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 72px;
+  padding: 10px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.62);
+  color: var(--muted);
 }
 
 .stats-grid {
@@ -867,6 +897,25 @@ textarea:focus {
 
 .settings-form label span {
   font-size: 14px;
+}
+
+.auth-sheet {
+  max-width: 520px;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.auth-form {
+  display: none;
+}
+
+.auth-form.is-active {
+  display: grid;
 }
 
 .form-foot {
