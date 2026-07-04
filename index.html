@@ -167,6 +167,33 @@
             </ul>
           </div>
         </section>
+
+        <section class="view" id="adminView" aria-label="管理平台">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">超级管理员</p>
+              <h1>管理平台</h1>
+            </div>
+            <button class="ghost-btn" id="adminLogoutBtn" type="button">退出</button>
+          </div>
+
+          <div class="stats-grid admin-stats" id="adminStats"></div>
+
+          <div class="section-title">
+            <h2>用户管理</h2>
+          </div>
+          <div class="admin-list" id="adminUsers"></div>
+
+          <div class="section-title">
+            <h2>作品管理</h2>
+          </div>
+          <div class="admin-list" id="adminWorks"></div>
+
+          <div class="section-title">
+            <h2>留言管理</h2>
+          </div>
+          <div class="admin-list" id="adminMessages"></div>
+        </section>
       </main>
 
       <nav class="tabbar" aria-label="底部导航">
@@ -204,6 +231,46 @@
           <div class="author-stats" id="authorStats"></div>
           <div class="author-work" id="authorWork"></div>
           <button class="primary-btn message-author-btn" id="messageAuthorBtn" type="button">给书友留言</button>
+        </section>
+      </div>
+
+      <div class="modal" id="adminWorkModal" hidden>
+        <button class="modal-backdrop" type="button" aria-label="关闭"></button>
+        <section class="author-sheet admin-work-sheet" role="dialog" aria-modal="true" aria-labelledby="adminWorkTitle">
+          <button class="sheet-close" type="button" aria-label="关闭">×</button>
+          <div class="panel-head settings-head">
+            <p class="eyebrow">作品查看</p>
+            <h2 id="adminWorkTitle"></h2>
+            <p class="muted" id="adminWorkMeta"></p>
+          </div>
+          <img class="admin-work-main" id="adminWorkMain" alt="" />
+          <div class="thumb-strip admin-work-thumbs" id="adminWorkThumbs" hidden></div>
+          <div class="admin-work-detail" id="adminWorkDetail"></div>
+        </section>
+      </div>
+
+      <div class="modal" id="adminUserModal" hidden>
+        <button class="modal-backdrop" type="button" aria-label="关闭"></button>
+        <section class="author-sheet admin-work-sheet" role="dialog" aria-modal="true" aria-labelledby="adminUserTitle">
+          <button class="sheet-close" type="button" aria-label="关闭">×</button>
+          <div class="author-head">
+            <div class="avatar" id="adminUserAvatar">友</div>
+            <div>
+              <p class="eyebrow">用户卡片</p>
+              <h2 id="adminUserTitle"></h2>
+              <p class="muted" id="adminUserMeta"></p>
+              <p class="profile-bio" id="adminUserBio"></p>
+            </div>
+          </div>
+          <div class="author-stats" id="adminUserStats"></div>
+          <div class="section-title">
+            <h2>发布的作品</h2>
+          </div>
+          <div class="mini-list" id="adminUserWorks"></div>
+          <div class="section-title">
+            <h2>评价的作品</h2>
+          </div>
+          <div class="mini-list" id="adminUserVotes"></div>
         </section>
       </div>
 
@@ -330,7 +397,10 @@
               <h2></h2>
               <p class="meta"></p>
             </div>
-            <button class="ghost-btn detail-btn" type="button">详情</button>
+            <div class="work-actions">
+              <button class="ghost-btn share-work-btn" type="button">转发</button>
+              <button class="ghost-btn detail-btn" type="button">详情</button>
+            </div>
           </div>
           <p class="intro"></p>
           <div class="result-panel" hidden></div>

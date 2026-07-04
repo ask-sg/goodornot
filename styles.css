@@ -405,6 +405,12 @@ textarea:focus {
   gap: 12px;
 }
 
+.work-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 7px;
+}
+
 .work-title-row h2 {
   margin-bottom: 4px;
 }
@@ -425,6 +431,14 @@ textarea:focus {
   padding: 7px 12px;
   font-size: 13px;
   font-weight: 700;
+}
+
+.link-btn {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--red);
+  font-weight: 800;
 }
 
 .result-panel {
@@ -672,6 +686,133 @@ textarea:focus {
   color: #4d453d;
   font-size: 14px;
   line-height: 1.55;
+}
+
+.admin-list {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.82);
+}
+
+.admin-work-row {
+  align-items: start;
+}
+
+.admin-row img {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.admin-row strong,
+.admin-row span {
+  display: block;
+}
+
+.admin-row span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.admin-password-tools {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-password-input {
+  height: 36px;
+  min-width: 0;
+}
+
+.admin-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-work-sheet {
+  max-height: 92dvh;
+  overflow-y: auto;
+}
+
+.admin-work-main {
+  width: 100%;
+  max-height: 58dvh;
+  display: block;
+  object-fit: contain;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.admin-work-thumbs {
+  margin: 10px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.admin-work-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.admin-work-detail div {
+  min-width: 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--surface-2);
+}
+
+.admin-work-detail span,
+.admin-work-detail strong {
+  display: block;
+}
+
+.admin-work-detail span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.admin-work-detail strong {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.admin-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.admin-metrics em {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(36, 33, 29, 0.06);
+  color: #4d453d;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
 }
 
 .mini-work img {

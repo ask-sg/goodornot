@@ -1,4 +1,11 @@
 const STORAGE_KEY = "haobuhao-state-v1";
+const SUPER_ADMIN = {
+  email: "admin@zuopin.test",
+  password: "Admin123",
+  nickname: "超级管理员",
+};
+
+const commonsImage = (name) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(name)}`;
 
 const seedWorks = [
   {
@@ -52,6 +59,159 @@ const seedWorks = [
     goodCount: 1846,
     badCount: 154,
   },
+  {
+    id: "20260629-U2001-001",
+    title: "董其昌行草轴",
+    year: "明",
+    category: "行",
+    intro: "行草相间，欹侧中见清润。",
+    image: commonsImage("Calligraphy of Cursive and Semi-cursive styleby Dong Qichang.jpg"),
+    images: [commonsImage("Calligraphy of Cursive and Semi-cursive styleby Dong Qichang.jpg")],
+    author: "云间",
+    authorLevel: "资深书友",
+    authorBio: "取法董香光一路",
+    createdAt: "2026-06-29",
+    goodWeight: 142.6,
+    badWeight: 38.2,
+    goodCount: 143,
+    badCount: 38,
+  },
+  {
+    id: "20260628-U2002-001",
+    title: "金圣叹手迹",
+    year: "清",
+    category: "行",
+    intro: "笔意轻快，结构自然舒展。",
+    image: commonsImage("Calligraphy of Jin Shengtan.jpg"),
+    images: [commonsImage("Calligraphy of Jin Shengtan.jpg")],
+    author: "半窗",
+    authorLevel: "书友",
+    authorBio: "喜欢明清小品字",
+    createdAt: "2026-06-28",
+    goodWeight: 39.4,
+    badWeight: 20.1,
+    goodCount: 40,
+    badCount: 20,
+  },
+  {
+    id: "20260627-U2003-001",
+    title: "沈瑞麟书法",
+    year: "近代",
+    category: "楷",
+    intro: "结体平正，转折处见力度。",
+    image: commonsImage("Calligraphy of Shen Ruilin.jpg"),
+    images: [commonsImage("Calligraphy of Shen Ruilin.jpg")],
+    author: "石泉",
+    authorLevel: "爱好者",
+    authorBio: "偏爱碑帖临摹",
+    createdAt: "2026-06-27",
+    goodWeight: 18.9,
+    badWeight: 11.5,
+    goodCount: 19,
+    badCount: 12,
+  },
+  {
+    id: "20260626-U2004-001",
+    title: "熙洽书法",
+    year: "近代",
+    category: "行",
+    intro: "气息流畅，行笔有疏密变化。",
+    image: commonsImage("Calligraphy of Xi Qia.jpg"),
+    images: [commonsImage("Calligraphy of Xi Qia.jpg")],
+    author: "望山",
+    authorLevel: "书友",
+    authorBio: "一日一临帖",
+    createdAt: "2026-06-26",
+    goodWeight: 55.7,
+    badWeight: 42.6,
+    goodCount: 56,
+    badCount: 43,
+  },
+  {
+    id: "20260625-U2005-001",
+    title: "谢吉士书法",
+    year: "清",
+    category: "楷",
+    intro: "字形端稳，适合作为楷法样本。",
+    image: commonsImage("Calligraphy of Xie Jishi.jpg"),
+    images: [commonsImage("Calligraphy of Xie Jishi.jpg")],
+    author: "端石",
+    authorLevel: "资深书友",
+    authorBio: "写字重在骨力",
+    createdAt: "2026-06-25",
+    goodWeight: 88.2,
+    badWeight: 15.4,
+    goodCount: 89,
+    badCount: 15,
+  },
+  {
+    id: "20260624-U2006-001",
+    title: "郑孝胥书法",
+    year: "近代",
+    category: "行",
+    intro: "笔画厚重，章法较为开张。",
+    image: commonsImage("Calligraphy of Zheng Xiaoxu 01.jpg"),
+    images: [commonsImage("Calligraphy of Zheng Xiaoxu 01.jpg")],
+    author: "秋水",
+    authorLevel: "书友",
+    authorBio: "看线条，也看气韵",
+    createdAt: "2026-06-24",
+    goodWeight: 27.6,
+    badWeight: 19.8,
+    goodCount: 28,
+    badCount: 20,
+  },
+  {
+    id: "20260623-U2007-001",
+    title: "中山手迹",
+    year: "近代",
+    category: "行",
+    intro: "章法简洁，字势开阔。",
+    image: commonsImage("Calligraphy Sun Yat-Sen.jpg"),
+    images: [commonsImage("Calligraphy Sun Yat-Sen.jpg")],
+    author: "南社",
+    authorLevel: "爱好者",
+    authorBio: "喜欢近现代墨迹",
+    createdAt: "2026-06-23",
+    goodWeight: 11.5,
+    badWeight: 4.1,
+    goodCount: 12,
+    badCount: 4,
+  },
+  {
+    id: "20260622-U2008-001",
+    title: "草书字样",
+    year: "示例",
+    category: "草",
+    intro: "用于测试草书类作品展示。",
+    image: commonsImage("Caoshu.png"),
+    images: [commonsImage("Caoshu.png")],
+    author: "草堂",
+    authorLevel: "爱好者",
+    authorBio: "草法初学者",
+    createdAt: "2026-06-22",
+    goodWeight: 5.4,
+    badWeight: 3.2,
+    goodCount: 6,
+    badCount: 3,
+  },
+  {
+    id: "20260621-U2009-001",
+    title: "结义书法",
+    year: "示例",
+    category: "楷",
+    intro: "小幅作品，便于测试竖图裁切。",
+    image: commonsImage("Chinese calligraphy jie yi.jpg"),
+    images: [commonsImage("Chinese calligraphy jie yi.jpg")],
+    author: "砚边",
+    authorLevel: "普通观众",
+    authorBio: "刚开始看书法",
+    createdAt: "2026-06-21",
+    goodWeight: 3.2,
+    badWeight: 6.1,
+    goodCount: 3,
+    badCount: 6,
+  },
 ];
 
 const defaultState = {
@@ -73,6 +233,7 @@ const defaultState = {
   works: seedWorks,
   messages: [],
   accounts: [],
+  deletedWorks: [],
 };
 
 let state = loadState();
@@ -81,21 +242,29 @@ normalizeWorks(state.works);
 saveState();
 let activeFilter = "all";
 let activeDetailWork = null;
+let sharedWorkId = new URLSearchParams(window.location.search).get("work");
 
 const views = {
   feed: document.querySelector("#feedView"),
   upload: document.querySelector("#uploadView"),
   profile: document.querySelector("#profileView"),
   rules: document.querySelector("#rulesView"),
+  admin: document.querySelector("#adminView"),
 };
 
 const workList = document.querySelector("#workList");
 const template = document.querySelector("#workCardTemplate");
 const toast = document.querySelector("#toast");
 const authorModal = document.querySelector("#authorModal");
+const adminWorkModal = document.querySelector("#adminWorkModal");
+const adminUserModal = document.querySelector("#adminUserModal");
 const profileModal = document.querySelector("#profileModal");
 const messageModal = document.querySelector("#messageModal");
 const authModal = document.querySelector("#authModal");
+
+if (sharedWorkId) {
+  activeFilter = "all";
+}
 
 function loadState() {
   const saved = localStorage.getItem(STORAGE_KEY);
@@ -104,13 +273,19 @@ function loadState() {
   try {
     const parsed = JSON.parse(saved);
     const byId = new Map(parsed.works?.map((work) => [work.id, work]) || []);
-    const works = seedWorks.map((work) => ({ ...work, ...(byId.get(work.id) || {}) }));
-    const uploaded = (parsed.works || []).filter((work) => !seedWorks.some((seed) => seed.id === work.id));
+    const deletedWorks = Array.isArray(parsed.deletedWorks) ? parsed.deletedWorks : [];
+    const works = seedWorks
+      .filter((work) => !deletedWorks.includes(work.id))
+      .map((work) => ({ ...work, ...(byId.get(work.id) || {}) }));
+    const uploaded = (parsed.works || []).filter(
+      (work) => !seedWorks.some((seed) => seed.id === work.id) && !deletedWorks.includes(work.id),
+    );
     const loadedState = {
       user: { ...defaultState.user, ...parsed.user },
       works: [...works, ...uploaded],
       messages: Array.isArray(parsed.messages) ? parsed.messages : [],
       accounts: Array.isArray(parsed.accounts) ? parsed.accounts : [],
+      deletedWorks,
     };
     normalizeWorks(loadedState.works);
     return loadedState;
@@ -189,6 +364,29 @@ function formatDate(value) {
   return `${date.getMonth() + 1}月${date.getDate()}日`;
 }
 
+function getWorkShareUrl(work) {
+  const url = new URL(window.location.href);
+  url.searchParams.set("work", work.id);
+  url.hash = "";
+  return url.toString();
+}
+
+async function shareWork(work) {
+  const url = getWorkShareUrl(work);
+  const shareData = {
+    title: `作品好不好：${work.title}`,
+    text: "一眼定乾坤，来看看这件作品好不好。",
+    url,
+  };
+
+  if (navigator.share) {
+    await navigator.share(shareData).catch(() => {});
+  } else {
+    await navigator.clipboard?.writeText(url).catch(() => {});
+    showToast("作品链接已复制");
+  }
+}
+
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -212,6 +410,7 @@ function setAvatar(element, text, image) {
 function render() {
   renderFeed();
   renderProfile();
+  renderAdmin();
   document.querySelector("#userWeight").textContent = formatWeight(state.user.weight);
   document.querySelector("#logoutBtn").hidden = !state.user.isAuthenticated;
 }
@@ -267,6 +466,19 @@ function registerAccount(form) {
 function loginAccount(form) {
   const email = form.email.value.trim().toLowerCase();
   const password = form.password.value;
+  if (email === SUPER_ADMIN.email && password === SUPER_ADMIN.password) {
+    applyAccount({
+      email: SUPER_ADMIN.email,
+      password: SUPER_ADMIN.password,
+      nickname: SUPER_ADMIN.nickname,
+      avatarText: "管",
+      avatarImage: "",
+      bio: "平台测试管理员",
+    });
+    showToast("超级管理员已登录");
+    switchView("admin");
+    return;
+  }
   const account = state.accounts.find((item) => item.email === email && item.password === password);
 
   if (!account) {
@@ -291,6 +503,10 @@ function applyAccount(account) {
   closeAuthModal();
 }
 
+function isAdmin() {
+  return state.user.isAuthenticated && state.user.email === SUPER_ADMIN.email;
+}
+
 function persistCurrentAccount(oldEmail, password) {
   const account = state.accounts.find((item) => item.email === oldEmail || item.email === state.user.email);
   if (!account) return;
@@ -306,6 +522,7 @@ function logout() {
   state.user.isAuthenticated = false;
   saveState();
   render();
+  switchView("feed");
   openAuthModal("login");
   showToast("已退出登录");
 }
@@ -328,6 +545,10 @@ function renderFeed() {
   }
 
   works.sort((a, b) => {
+    if (sharedWorkId) {
+      if (a.id === sharedWorkId && b.id !== sharedWorkId) return -1;
+      if (b.id === sharedWorkId && a.id !== sharedWorkId) return 1;
+    }
     const aVoted = Boolean(state.user.votes[a.id]);
     const bVoted = Boolean(state.user.votes[b.id]);
     if (aVoted !== bVoted) return aVoted ? 1 : -1;
@@ -388,6 +609,7 @@ function renderFeed() {
     }
 
     node.querySelector(".detail-btn").addEventListener("click", () => showDetail(work, Boolean(voted)));
+    node.querySelector(".share-work-btn").addEventListener("click", () => shareWork(work));
     workList.appendChild(node);
   }
 }
@@ -635,6 +857,278 @@ function renderMessages(uploadedWorks) {
   }
 }
 
+function renderAdmin() {
+  if (!document.querySelector("#adminView") || !isAdmin()) return;
+  const totalVotes = state.works.reduce((sum, work) => sum + getTotal(work), 0);
+  document.querySelector("#adminStats").innerHTML = `
+    <div><span>注册用户</span><strong>${state.accounts.length}</strong></div>
+    <div><span>作品总数</span><strong>${state.works.length}</strong></div>
+    <div><span>评价总数</span><strong>${totalVotes}</strong></div>
+    <div><span>私密留言</span><strong>${state.messages.length}</strong></div>
+  `;
+
+  const users = [
+    { email: SUPER_ADMIN.email, nickname: SUPER_ADMIN.nickname, role: "超级管理员" },
+    ...state.accounts.map((account) => ({ ...account, role: "普通用户" })),
+  ];
+  document.querySelector("#adminUsers").innerHTML = users
+    .map(
+      (user) => `
+        <div class="admin-row">
+          <div><strong>${escapeHtml(user.nickname)}</strong><span>${escapeHtml(user.email)} · ${user.role}</span></div>
+          <button class="ghost-btn" type="button" data-admin-view-user="${escapeHtml(user.email)}" data-admin-user-name="${escapeHtml(user.nickname)}">用户卡片</button>
+          ${
+            user.role === "普通用户"
+              ? `
+                <div class="admin-password-tools">
+                  <input class="admin-password-input" type="password" minlength="6" placeholder="新密码" />
+                  <button class="ghost-btn" type="button" data-admin-reset-password="${escapeHtml(user.email)}">重置密码</button>
+                </div>
+              `
+              : ""
+          }
+        </div>
+      `,
+    )
+    .join("");
+
+  document.querySelector("#adminWorks").innerHTML = state.works
+    .map(
+      (work) => `
+        <div class="admin-row admin-work-row">
+          <img src="${getWorkImages(work)[0]}" alt="" />
+          <div>
+            <strong>${escapeHtml(work.title)}</strong>
+            <span>
+              <button class="link-btn" type="button" data-admin-view-author="${escapeHtml(work.author)}">${escapeHtml(work.author)}</button>
+              · ${escapeHtml(work.category)} · ${escapeHtml(work.year)} · ${getHeat(work)} · ${getDegree(work) || "暂无程度标签"}
+            </span>
+            <div class="admin-metrics">
+              <em>评价 ${getTotal(work)}</em>
+              <em>好评 ${work.goodCount}</em>
+              <em>差评 ${work.badCount}</em>
+              <em>好评率 ${formatPercent(getGoodRate(work))}</em>
+              <em>好评值 ${work.goodWeight.toFixed(1)}</em>
+              <em>差评值 ${work.badWeight.toFixed(1)}</em>
+              <em>共识 ${getConsensus(work) === "good" ? "好" : "孬"}</em>
+              <em>图片 ${getWorkImages(work).length}</em>
+            </div>
+          </div>
+          <div class="admin-actions">
+            <button class="ghost-btn" type="button" data-admin-view-work="${work.id}">查看</button>
+            <button class="ghost-btn" type="button" data-admin-share-work="${work.id}">转发</button>
+            <button class="ghost-btn" type="button" data-admin-delete-work="${work.id}">删除</button>
+          </div>
+        </div>
+      `,
+    )
+    .join("");
+
+  document.querySelector("#adminMessages").innerHTML = state.messages.length
+    ? state.messages
+        .map(
+          (message) => `
+            <div class="admin-row">
+              <div><strong>${escapeHtml(message.workTitle)}</strong><span>给 ${escapeHtml(message.toAuthor)}：${escapeHtml(message.content)}</span></div>
+              <button class="ghost-btn" type="button" data-admin-delete-message="${message.id}">删除</button>
+            </div>
+          `,
+        )
+        .join("")
+    : '<div class="empty">暂无留言</div>';
+
+  document.querySelectorAll("[data-admin-reset-password]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const input = button.closest(".admin-row").querySelector(".admin-password-input");
+      resetAccountPassword(button.dataset.adminResetPassword, input.value);
+      input.value = "";
+    });
+  });
+  document.querySelectorAll("[data-admin-view-user]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openAdminUserModal({
+        email: button.dataset.adminViewUser,
+        nickname: button.dataset.adminUserName,
+      });
+    });
+  });
+  document.querySelectorAll("[data-admin-view-author]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openAdminUserModal({ nickname: button.dataset.adminViewAuthor });
+    });
+  });
+  document.querySelectorAll("[data-admin-share-work]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const work = state.works.find((item) => item.id === button.dataset.adminShareWork);
+      if (work) shareWork(work);
+    });
+  });
+  document.querySelectorAll("[data-admin-view-work]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const work = state.works.find((item) => item.id === button.dataset.adminViewWork);
+      if (work) openAdminWorkModal(work);
+    });
+  });
+  document.querySelectorAll("[data-admin-delete-work]").forEach((button) => {
+    button.addEventListener("click", () => deleteWork(button.dataset.adminDeleteWork));
+  });
+  document.querySelectorAll("[data-admin-delete-message]").forEach((button) => {
+    button.addEventListener("click", () => deleteMessage(button.dataset.adminDeleteMessage));
+  });
+}
+
+function openAdminUserModal(identity) {
+  const account = identity.email
+    ? state.accounts.find((item) => item.email === identity.email)
+    : state.accounts.find((item) => item.nickname === identity.nickname);
+  const nickname = account?.nickname || identity.nickname || SUPER_ADMIN.nickname;
+  const email = account?.email || (nickname === SUPER_ADMIN.nickname ? SUPER_ADMIN.email : "测试作者");
+  const avatarText = account?.avatarText || nickname.slice(0, 1);
+  const avatarImage = account?.avatarImage || "";
+  const bio = account?.bio || getAuthorBio(nickname);
+  const publishedWorks = state.works.filter((work) => work.author === nickname);
+  const votedItems = getAdminUserVotes(account);
+  const totalVotes = publishedWorks.reduce((sum, work) => sum + getTotal(work), 0);
+  const totalGood = publishedWorks.reduce((sum, work) => sum + work.goodCount, 0);
+  const totalBad = publishedWorks.reduce((sum, work) => sum + work.badCount, 0);
+  const goodRate = totalGood + totalBad ? totalGood / (totalGood + totalBad) : 0;
+
+  setAvatar(adminUserModal.querySelector("#adminUserAvatar"), avatarText, avatarImage);
+  adminUserModal.querySelector("#adminUserTitle").textContent = nickname;
+  adminUserModal.querySelector("#adminUserMeta").textContent = `${email} · ${getPublisherLevel(publishedWorks)}`;
+  adminUserModal.querySelector("#adminUserBio").textContent = bio;
+  adminUserModal.querySelector("#adminUserStats").innerHTML = `
+    <div><span>发布作品</span><strong>${publishedWorks.length}</strong></div>
+    <div><span>被评价</span><strong>${totalVotes}</strong></div>
+    <div><span>总好评</span><strong>${totalGood}</strong></div>
+    <div><span>好评率</span><strong>${formatPercent(goodRate)}</strong></div>
+  `;
+
+  adminUserModal.querySelector("#adminUserWorks").innerHTML = publishedWorks.length
+    ? publishedWorks
+        .map(
+          (work) => `
+            <div class="mini-work">
+              <img src="${getWorkImages(work)[0]}" alt="${escapeHtml(work.title)}" />
+              <div><strong>${escapeHtml(work.title)}</strong><span>${getTotal(work)}评 · ${formatPercent(getGoodRate(work))}好评 · ${getHeat(work)}</span></div>
+              <strong>${getDegree(work) || "暂无"}</strong>
+            </div>
+          `,
+        )
+        .join("")
+    : '<div class="empty">还没有发布作品</div>';
+
+  adminUserModal.querySelector("#adminUserVotes").innerHTML = votedItems.length
+    ? votedItems
+        .map(
+          (item) => `
+            <div class="mini-work">
+              <img src="${getWorkImages(item.work)[0]}" alt="${escapeHtml(item.work.title)}" />
+              <div><strong>${escapeHtml(item.work.title)}</strong><span>评价：${item.vote.vote === "good" ? "好" : "孬"} · 奖励 +${formatWeight(item.vote.reward || 0)}</span></div>
+              <strong>${formatDate(item.vote.at)}</strong>
+            </div>
+          `,
+        )
+        .join("")
+    : '<div class="empty">还没有可查看的评价记录</div>';
+
+  adminUserModal.hidden = false;
+}
+
+function closeAdminUserModal() {
+  adminUserModal.hidden = true;
+}
+
+function getAuthorBio(nickname) {
+  const work = state.works.find((item) => item.author === nickname && item.authorBio);
+  return work?.authorBio || "暂未填写自我介绍";
+}
+
+function getAdminUserVotes(account) {
+  if (!account || account.email !== state.user.email) return [];
+  return Object.entries(state.user.votes)
+    .map(([workId, vote]) => {
+      const work = state.works.find((item) => item.id === workId);
+      return work ? { work, vote } : null;
+    })
+    .filter(Boolean);
+}
+
+function openAdminWorkModal(work) {
+  const images = getWorkImages(work);
+  const mainImage = adminWorkModal.querySelector("#adminWorkMain");
+  adminWorkModal.querySelector("#adminWorkTitle").textContent = work.title;
+  adminWorkModal.querySelector("#adminWorkMeta").textContent = `${work.author} · ${work.category} · ${work.year}`;
+  mainImage.src = images[0];
+  mainImage.alt = work.title;
+
+  const thumbs = adminWorkModal.querySelector("#adminWorkThumbs");
+  thumbs.innerHTML = "";
+  thumbs.hidden = images.length <= 1;
+  images.forEach((src, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = index === 0 ? "thumb is-active" : "thumb";
+    button.innerHTML = `<img src="${src}" alt="" />`;
+    button.addEventListener("click", () => {
+      mainImage.src = src;
+      thumbs.querySelectorAll(".thumb").forEach((thumb) => thumb.classList.toggle("is-active", thumb === button));
+    });
+    thumbs.appendChild(button);
+  });
+
+  adminWorkModal.querySelector("#adminWorkDetail").innerHTML = `
+    <div><span>作品编号</span><strong>${escapeHtml(work.id)}</strong></div>
+    <div><span>热度标签</span><strong>${getHeat(work)}</strong></div>
+    <div><span>好评程度</span><strong>${getDegree(work) || "暂无"}</strong></div>
+    <div><span>当前共识</span><strong>${getConsensus(work) === "good" ? "好" : "孬"}</strong></div>
+    <div><span>评价总数</span><strong>${getTotal(work)}</strong></div>
+    <div><span>好评数</span><strong>${work.goodCount}</strong></div>
+    <div><span>差评数</span><strong>${work.badCount}</strong></div>
+    <div><span>好评率</span><strong>${formatPercent(getGoodRate(work))}</strong></div>
+    <div><span>好评值</span><strong>${work.goodWeight.toFixed(1)}</strong></div>
+    <div><span>差评值</span><strong>${work.badWeight.toFixed(1)}</strong></div>
+    <div><span>发布时间</span><strong>${escapeHtml(work.createdAt)}</strong></div>
+    <div><span>简介</span><strong>${escapeHtml(work.intro || "暂无")}</strong></div>
+  `;
+  adminWorkModal.hidden = false;
+}
+
+function closeAdminWorkModal() {
+  adminWorkModal.hidden = true;
+}
+
+function resetAccountPassword(email, newPassword) {
+  const account = state.accounts.find((item) => item.email === email);
+  if (!account) return;
+  newPassword = newPassword.trim();
+  if (newPassword.length < 6) {
+    showToast("新密码至少6位");
+    return;
+  }
+  account.password = newPassword;
+  saveState();
+  render();
+  showToast("密码已重置");
+}
+
+function deleteWork(workId) {
+  state.works = state.works.filter((work) => work.id !== workId);
+  state.messages = state.messages.filter((message) => message.workId !== workId);
+  if (!state.deletedWorks.includes(workId)) state.deletedWorks.push(workId);
+  delete state.user.votes[workId];
+  saveState();
+  render();
+  showToast("作品已删除");
+}
+
+function deleteMessage(messageId) {
+  state.messages = state.messages.filter((message) => message.id !== messageId);
+  saveState();
+  render();
+  showToast("留言已删除");
+}
+
 function getPublisherLevel(works) {
   if (works.some((work) => getDegree(work) === "精品作品")) return "书法家";
   if (works.some((work) => getDegree(work) === "优秀作品")) return "资深书友";
@@ -651,6 +1145,10 @@ function getReviewerLevel() {
 }
 
 function switchView(name) {
+  if (name === "admin" && !isAdmin()) {
+    showToast("仅超级管理员可进入");
+    return;
+  }
   if ((name === "upload" || name === "profile") && !requireAuth("请先注册或登录")) return;
   Object.entries(views).forEach(([viewName, view]) => {
     view.classList.toggle("is-active", viewName === name);
@@ -714,9 +1212,14 @@ document.querySelector("#loginForm").addEventListener("submit", (event) => {
 });
 
 document.querySelector("#logoutBtn").addEventListener("click", logout);
+document.querySelector("#adminLogoutBtn").addEventListener("click", logout);
 
 authorModal.querySelector(".modal-backdrop").addEventListener("click", closeAuthorModal);
 authorModal.querySelector(".sheet-close").addEventListener("click", closeAuthorModal);
+adminWorkModal.querySelector(".modal-backdrop").addEventListener("click", closeAdminWorkModal);
+adminWorkModal.querySelector(".sheet-close").addEventListener("click", closeAdminWorkModal);
+adminUserModal.querySelector(".modal-backdrop").addEventListener("click", closeAdminUserModal);
+adminUserModal.querySelector(".sheet-close").addEventListener("click", closeAdminUserModal);
 document.querySelector("#messageAuthorBtn").addEventListener("click", openMessageModal);
 messageModal.querySelector(".modal-backdrop").addEventListener("click", closeMessageModal);
 messageModal.querySelector(".sheet-close").addEventListener("click", closeMessageModal);
@@ -797,8 +1300,10 @@ document.querySelector("#uploadForm").addEventListener("submit", (event) => {
 });
 
 render();
-if (!state.user.isAuthenticated) {
+if (!state.user.isAuthenticated && !sharedWorkId) {
   openAuthModal(state.accounts.length ? "login" : "register");
+} else if (sharedWorkId && state.works.some((work) => work.id === sharedWorkId)) {
+  showToast("已打开转发作品");
 }
 
 function getWorkImages(work) {
